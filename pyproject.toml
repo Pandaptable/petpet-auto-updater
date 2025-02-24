@@ -1,0 +1,28 @@
+[project]
+name = "petpet-auto-updater"
+version = "1.0.0"
+description = ":3"
+readme = "README.md"
+requires-python = "==3.12.9"
+dependencies = [
+    "asqlite>=2.0.0",
+    "dotenv>=0.9.9",
+    "hata>=1.3.75",
+    "pet-pet-gif>=1.0.2",
+    "pynacl>=1.5.0",
+    "python-dateutil>=2.9.0.post0",
+    "ruff>=0.0.17",
+]
+
+[tool.ruff]
+line-length = 200
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "tab"
+line-ending = "cr-lf"
+preview = true
+
+[tool.ruff.lint]
+preview = true
+ignore = ["F401", "F403", "F405", "F722"]
