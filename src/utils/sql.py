@@ -53,7 +53,7 @@ def fetch_user_emojis(user_id):
 		return result
 
 
-def fetch_existing_emoji(user_id, guild_id):
+async def fetch_existing_emoji(user_id, guild_id):
 	with sqlite3.connect("petpet.db") as connection:
 		cursor = connection.cursor()
 		cursor.execute(
@@ -64,9 +64,9 @@ def fetch_existing_emoji(user_id, guild_id):
 			""",
 			(user_id, guild_id),
 		)
-		result = cursor.fetchone
+		result = int(cursor.fetchone()[0]) if cursor.fetchone() else None
 		cursor.close()
-		return result is not None
+		return result
 
 
 def emoji_exists(emoji_id):

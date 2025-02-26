@@ -65,8 +65,9 @@ async def add_petpet(
 	emoji_name : `str`
 	"""
 
-	existing_emoji_id = fetch_existing_emoji(user.id, event.guild_id)
-	if existing_emoji_id:
+	existing_emoji_id = await fetch_existing_emoji(user.id, event.guild_id)
+	if existing_emoji_id is not None:
+		print(existing_emoji_id)
 		await client.emoji_delete((event.guild_id, existing_emoji_id), reason="User reran command")
 
 	async with client.http.get(user_avatar_url(user)) as response:
