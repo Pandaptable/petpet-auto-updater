@@ -20,7 +20,6 @@ def init_petpet_db():
 		cursor.close()
 
 
-
 def add_emoji(user_id, guild_id, emoji_name, emoji_id):
 	with sqlite3.connect("petpet.db") as connection:
 		cursor = connection.cursor()
@@ -32,7 +31,7 @@ def add_emoji(user_id, guild_id, emoji_name, emoji_id):
 			SET emoji_name = excluded.emoji_name,
 				emoji_id = excluded.emoji_id
 			""",
-			(user_id, guild_id, emoji_name, emoji_id)
+			(user_id, guild_id, emoji_name, emoji_id),
 		)
 		connection.commit()
 		cursor.close()
@@ -47,7 +46,7 @@ def fetch_user_emojis(user_id):
 			FROM emojis
 			WHERE user_id = ?
 			""",
-			(user_id,)
+			(user_id,),
 		)
 		result = cursor.fetchall()
 		cursor.close()
@@ -63,7 +62,7 @@ def fetch_existing_emoji(user_id, guild_id):
 			FROM emojis
 			WHERE user_id = ? AND guild_id = ?
 			""",
-			(user_id, guild_id)
+			(user_id, guild_id),
 		)
 		result = cursor.fetchone
 		cursor.close()
@@ -79,11 +78,12 @@ def emoji_exists(emoji_id):
 			FROM emojis
 			WHERE emoji_id = ?
 			""",
-			(emoji_id,)
+			(emoji_id,),
 		)
 		result = cursor.fetchone()
 		cursor.close()
 		return result is not None
+
 
 def remove_emoji(emoji_id):
 	with sqlite3.connect("petpet.db") as connection:
@@ -93,7 +93,7 @@ def remove_emoji(emoji_id):
 			DELETE FROM emojis
 			WHERE emoji_id = ?
 			""",
-			(emoji_id,)
+			(emoji_id,),
 		)
 		connection.commit()
 		cursor.close()

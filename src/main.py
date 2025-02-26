@@ -7,8 +7,7 @@ from hata.discord.http.urls import user_avatar_url
 from hata.ext.slash import setup_ext_slash
 from petpetgif import petpet
 
-from utils.sql import (add_emoji, emoji_exists, fetch_existing_emoji,
-                       fetch_user_emojis, init_petpet_db, remove_emoji)
+from utils.sql import add_emoji, emoji_exists, fetch_existing_emoji, fetch_user_emojis, init_petpet_db, remove_emoji
 
 load_dotenv()
 
@@ -51,7 +50,7 @@ async def emoji_delete(client, emoji):
 		remove_emoji(emoji.id)
 
 
-@client.interactions(integration_types=["guild_install"], is_global=True, required_permissions=Permission().update_by_keys(manage_emojis=True))
+@client.interactions(integration_context_types=["guild"], is_global=True, required_permissions=Permission().update_by_keys(create_guild_expressions=True))
 async def add_petpet(
 	client,
 	event,
