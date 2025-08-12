@@ -32,7 +32,8 @@ async def user_update(client, user, old_attributes):
 
 				async with client.http.get(avatar_url) as response:
 					content_type = response.headers.get("content-type", "").lower()
-					if content_type != "image/png":
+					content_types = ["image/jpeg", "image/png", "image/gif"]
+					if content_type not in content_types:
 						return "User has an invalid avatar."
 
 					emoji_data = await response.read()
